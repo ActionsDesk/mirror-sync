@@ -35,7 +35,7 @@ jobs:
       - name: Perform mirror sync
         uses: ActionsDesk/mirror-sync@main
         with:
-          remote-repository-url: https://${{ secrets.REMOTE_AUTHENTICATION_TOKEN }}@example.com/remote-repository
+          remote-repository-url: https://${{ secrets.REMOTE_AUTHENTICATION_TOKEN }}@example.com/remote-repository.git
 ```
 
 If you want to authenticate to the remote repository via HTTPS and an authentication token, add it to the `remote-repository-url` as in the example above.
