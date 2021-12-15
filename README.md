@@ -25,7 +25,7 @@ on:
   workflow_dispatch:
   push:
   schedule:
-    - cron: '5 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   mirror-sync:
