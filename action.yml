@@ -1,0 +1,32 @@
+name: 'mirror-sync'
+description: 'Action to synchronize repositories, including bidirectional synchronization.'
+inputs:
+  remote-repository-url:
+    required: true
+  git-user-email:
+    description: 'Email address used for merge commits'
+    default: '41898282+github-actions[bot]@users.noreply.github.com'
+  git-user-name:
+    description: 'Name used for merge commits'
+    default: 'github-actions[bot]'
+runs:
+  using: 'composite'
+  steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "github-actions[bot]"
+
+    - name: Add remote repository to remotes
+      shell: bash
+      run: git remote add remote ${{ inputs.remote-repository-url }}
+        
+    - name: Run mirror-sync.sh
+      shell: bash
+      run: ${{ github.action_path }}/mirror-sync.sh
